@@ -35,7 +35,7 @@ https://go-chat-app.kuji-server.com/
 1. **プロジェクトのclone**
    
     ```bash
-    git clone git@github.com:Kazu-K0032/go-chat-app.git
+    git clone git@github.com:KazuakiKuji/go-chat.git
     ```
 
 2. **FirebaseからFirebase Admin SDKの認証ファイルを取り込む**
