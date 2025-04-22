@@ -1,0 +1,145 @@
+{{ define "content" }}
+<div class="l-chat">
+  <div class="l-chat__sidebar">
+    <!-- チャットリスト(左サイド) -->
+    {{ if .Chats }}
+    <ul class="l-chat__list">
+      {{ range .Chats }}
+      <!-- チャットカード -->
+      <li
+        class="l-chat__item p-chatCard {{ if eq .ID $.ChatID }}--active{{ end }}"
+      >
+        <a href="/chat?chat_id={{ .ID }}" class="p-chatCard__link">
+          <div
+            class="js-iconWrap l-chat__imgWrap p-chatCard__iconWrap c-icon__wrap"
+            data-user-id="{{ .Contact.ID }}"
+          >
+            {{ if .Contact.Icon }}
+            <img
+              src="{{ .Contact.Icon }}"
+              alt="{{ .Contact.Username }}のアイコン"
+              class="p-chatCard__icon c-icon__img"
+              onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+            />
+            {{ else }}
+            <img
+              src="{{ getRandomDefaultIcon }}"
+              alt="{{ .Contact.Username }}のデフォルトアイコン"
+              class="p-chatCard__icon c-icon__img"
+            />
+            {{ end }}
+            <span
+              class="p-chatCard__status-indicator {{ if .Contact.IsOnline }}p-chatCard__status-indicator--online{{ else }}p-chatCard__status-indicator--offline{{ end }}"
+            ></span>
+          </div>
+          <div class="p-chatCard__info">
+            <p class="p-chatCard__name">{{ .Contact.Username }}</p>
+            {{ if .Messages }}
+            <p class="p-chatCard__preview">
+              {{ (index .Messages (sub (len .Messages) 1)).Content }}
+            </p>
+            {{ end }}
+          </div>
+          <time class="p-chatCard__time">{{ .UpdatedAt.Format "15:04" }}</time>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    {{ else }}
+    <!-- チャットリストが空の場合 -->
+    <div class="l-chat__empty">
+      <p class="l-chat__emptyText c-smTtl">チャットがありません</p>
+      <a href="/search" class="l-chat__searchBtn c-btn">ユーザーを探す</a>
+    </div>
+    {{ end }}
+  </div>
+
+  <!-- チャット本文(右サイド) -->
+  <div class="l-chatMain">
+    {{ if .CurrentChat }}
+    <!-- ヘッダー -->
+    <div class="l-chatMain__header">
+      <h1 class="l-chatMain__title c-midTtl">
+        {{ .CurrentChat.Contact.Username }}
+      </h1>
+    </div>
+
+    <!-- メッセージエリア -->
+    <div class="l-chatMain__messages" id="js-messageArea">
+      {{ range .CurrentChat.Messages }}
+      <!-- 受信メッセージ -->
+      {{ if ne .SenderID $.User.ID }}
+      <div class="l-chatMain__message p-message --received">
+        <div
+          class="js-iconWrap l-chatMain__imgWrap p-message__iconWrap c-icon__wrap"
+          data-user-id="{{ $.CurrentChat.Contact.ID }}"
+        >
+          {{ if $.CurrentChat.Contact.Icon }}
+          <img
+            src="{{ $.CurrentChat.Contact.Icon }}"
+            alt="{{ $.CurrentChat.Contact.Username }}のアイコン"
+            class="p-message__icon c-icon__img"
+            onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+          />
+          {{ else }}
+          <img
+            src="{{ getRandomDefaultIcon }}"
+            alt="{{ $.CurrentChat.Contact.Username }}のデフォルトアイコン"
+            class="p-message__icon c-icon__img"
+          />
+          {{ end }}
+        </div>
+        <div class="l-chatMain__content p-message__content">
+          <p class="p-message__text c-txt">{{ .Content }}</p>
+          <time class="p-message__time c-time"
+            >{{ .CreatedAt.Format "15:04" }}</time
+          >
+        </div>
+      </div>
+      {{ else }}
+      <!-- 送信メッセージ -->
+      <div class="l-chatMain__message p-message --sent">
+        <div class="l-chatMain__content p-message__content">
+          <p class="p-message__text c-txt">{{ .Content }}</p>
+          <time class="p-message__time c-time"
+            >{{ .CreatedAt.Format "15:04" }}</time
+          >
+        </div>
+      </div>
+      {{ end }} {{ end }}
+    </div>
+
+    <!-- 入力エリア -->
+    <div class="l-chatMain__inputWrap">
+      <form id="messageForm" class="l-chatMain__form">
+        <input
+          type="hidden"
+          name="chatID"
+          value="{{ .CurrentChat.ID }}"
+          class="l-chatMain__input"
+        />
+        <textarea
+          class="l-chatMain__textarea"
+          name="content"
+          placeholder="メッセージを入力"
+          id="js-messageInput"
+          required
+        ></textarea>
+        <button type="submit" class="l-chatMain__btn c-btn" id="js-sendButton">
+          <span class="js-buttonText">送信</span>
+        </button>
+      </form>
+    </div>
+    {{ else }}
+    <!-- チャットが選択されていない場合 -->
+    <div class="l-chatMain__empty">
+      <p class="l-chatMain__emptyText c-midTtl">チャットを選択してください</p>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script src="/js/chat.js"></script>
+<script src="/js/card.js"></script>
+{{ end }}

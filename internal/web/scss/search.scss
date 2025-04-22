@@ -1,0 +1,212 @@
+/**
+ * 検索ページのスタイルを管理するファイル
+*/
+@use "_index" as *;
+
+.l-search {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  height: calc(100vh - 15rem);
+  padding: 2rem;
+
+  &__header {
+    margin-bottom: 3rem;
+  }
+
+  &__content {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.l-searchForm {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__inputWrap {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding-left: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 2px rgb(74 144 226 / 10%);
+    }
+
+    &::placeholder {
+      font-size: 1.8rem;
+      color: #999;
+    }
+  }
+
+  &__btn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 12rem;
+    height: 6rem;
+    padding: 0 3rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    appearance: none;
+    cursor: pointer;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #357abd;
+      box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(0);
+    }
+  }
+}
+
+.l-searchResult {
+  padding: 2rem;
+  text-align: center;
+
+  &__text {
+    font-size: 2rem;
+    font-weight: $font-weight-medium;
+    color: $color-secondary;
+  }
+}
+
+// ==============================================
+// LARGE
+// ==============================================
+@media screen and (width <= 1440px) {
+  .l-searchForm {
+    &__inputWrap {
+      gap: 1.2rem;
+    }
+
+    &__input {
+      height: 5.6rem;
+      padding: 0 1.8rem;
+      padding-left: 1.8rem;
+      font-size: 1.7rem;
+
+      &::placeholder {
+        font-size: 1.7rem;
+      }
+    }
+
+    &__btn {
+      min-width: 11rem;
+      height: 5.6rem;
+      padding: 0 2.5rem;
+      font-size: 1.7rem;
+    }
+  }
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+@media screen and (width <= 1024px) {
+  .l-search {
+    max-width: 800px;
+    padding: 1.5rem;
+  }
+
+  .l-searchForm {
+    max-width: 600px;
+
+    &__inputWrap {
+      gap: 1rem;
+    }
+
+    &__input {
+      height: 5.2rem;
+      padding: 0 1.6rem;
+      padding-left: 1.6rem;
+      font-size: 1.6rem;
+
+      &::placeholder {
+        font-size: 1.6rem;
+      }
+    }
+
+    &__btn {
+      min-width: 10rem;
+      height: 5.2rem;
+      padding: 0 2rem;
+      font-size: 1.6rem;
+    }
+  }
+}
+
+// ==============================================
+// SMALL
+// ==============================================
+@media screen and (width <= 649px) {
+  .l-search {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .l-searchForm {
+    &__inputWrap {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &__input {
+      height: 5rem;
+      padding: 0 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.5rem;
+
+      &::placeholder {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__btn {
+      width: 100%;
+      min-width: 100%;
+      height: 5rem;
+      padding: 0;
+      font-size: 1.5rem;
+    }
+  }
+}

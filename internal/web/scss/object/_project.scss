@@ -1,0 +1,555 @@
+/**
+ * FLOCSSにおけるProjectスタイルを管理するファイル
+ * 全htmlファイルにて`p-`が接頭辞につくものが対象
+*/
+
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+// ナビゲーション
+.p-nav {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: $box-shadow-lg;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    height: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+  }
+
+  &__list {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__item {
+    font-weight: $font-weight-medium;
+    color: $color-text-gray;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-btn-hover;
+    }
+  }
+}
+
+// ユーザーカード
+.p-userList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  max-width: 800px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #e1e8ed;
+    transition: background-color 0.3s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+
+  &__imgWrap {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    margin-right: 1.5rem;
+  }
+
+  &__status-indicator {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 10%);
+    
+    &--online {
+      background-color: #34d399;
+    }
+
+    &--offline {
+      background-color: #ef4444;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    margin: 0 0 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__status {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #666;
+  }
+
+  &__action {
+    margin-left: 1.5rem;
+  }
+
+  &__btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.4rem;
+  }
+}
+
+// チャットカード
+.p-chatCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: $box-shadow-lg;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgb(0 0 0 / 15%);
+    transform: translateY(-2px);
+  }
+
+  &__link {
+    display: flex;
+    width: 100%;
+  }
+
+  &__iconWrap {
+    position: relative;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    margin-right: 1.5rem;
+    overflow: hidden;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    padding-right: 6rem;
+  }
+
+  &__name {
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+
+  &__time {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    color: #999;
+  }
+
+  &__preview {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: $color-text-gray;
+    -webkit-box-orient: vertical;
+  }
+
+  &__status-indicator {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 10%);
+
+    &--online {
+      background-color: #34d399;
+    }
+
+    &--offline {
+      background-color: #ef4444;
+    }
+  }
+
+  &__status {
+    font-size: 1.2rem;
+    color: $color-text-gray;
+  }
+}
+
+// メッセージカード
+.p-message {
+  display: flex;
+  align-items: flex-start;
+  max-width: 70%;
+  margin-bottom: 2rem;
+
+  &.--sent {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    margin-left: auto;
+
+    .p-message__content {
+      margin: 0 1.2rem 0 0;
+      background-color: $color-primary;
+      border-radius: 16px 2px 16px 16px;
+
+      &::before {
+        right: -8px;
+        left: auto;
+        border-right: 0;
+        border-left: 8px solid $color-primary;
+      }
+    }
+
+    .p-message__text {
+      color: #fff;
+      text-align: left;
+    }
+
+    .p-message__time {
+      right: 0;
+      text-align: right;
+    }
+  }
+
+  &__iconWrap {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    position: relative;
+    padding: 1.2rem 1.6rem;
+    margin: 0 0 0 1.2rem;
+    background-color: $bg-secondary;
+    border-radius: 2px 16px 16px;
+
+    &::before {
+      position: absolute;
+      top: 12px;
+      left: -8px;
+      content: "";
+      border-top: 8px solid transparent;
+      border-right: 8px solid $bg-secondary;
+      border-bottom: 8px solid transparent;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #333;
+    word-break: break-word;
+  }
+
+  &__time {
+    position: absolute;
+    bottom: -2rem;
+    left: 0;
+    font-size: 1.2rem;
+    color: #999;
+  }
+}
+
+// 登録内容確認フォーム
+.p-confirm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 4px;
+
+  &__item {
+    padding: 1.6rem;
+    margin-bottom: 15px;
+    background: $bg-secondary;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__txt {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+// フォーム
+.p-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  padding: 20px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: $box-shadow-lg;
+
+  &__btnWrap {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 80%;
+  }
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+@media screen and (width <= 1024px) {
+  .p-nav {
+    &__container {
+      max-width: 90%;
+      padding: 0.8rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  .p-profile {
+    padding: 1.5rem;
+  }
+
+  .p-profile-stats {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .p-tabs {
+    &__list {
+      gap: 1rem;
+    }
+
+    &__link {
+      padding: 0.75rem 0;
+      font-size: 0.875rem;
+    }
+  }
+
+  .p-userList {
+    max-width: 600px;
+  }
+
+  .p-chatCard {
+    position: relative;
+    padding: 1.2rem;
+
+    &__iconWrap {
+      margin-right: 1.2rem;
+    }
+
+    &__content {
+      padding-right: 5rem;
+    }
+
+    &__name {
+      font-size: 1.4rem;
+    }
+
+    &__preview {
+      font-size: 1.2rem;
+    }
+
+    &__time {
+      top: 1.2rem;
+      right: 1.2rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .p-message {
+    max-width: 75%;
+    margin-bottom: 1.8rem;
+
+    &__iconWrap {
+      width: 36px;
+      height: 36px;
+    }
+
+    &__content {
+      padding: 1rem 1.4rem;
+      margin: 0 0 0 1rem;
+    }
+
+    &.--sent .p-message__content {
+      margin: 0 1rem 0 0;
+    }
+
+    &__text {
+      font-size: 1.4rem;
+    }
+
+    &__time {
+      bottom: -1.8rem;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// ==============================================
+// SMALL
+// ==============================================
+@media screen and (width <= 649px) {
+  .p-nav {
+    &__container {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    &__logo {
+      font-size: 1.5rem;
+    }
+
+    &__list {
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      width: 100%;
+    }
+
+    &__item {
+      font-size: 1rem;
+    }
+  }
+
+  .p-chatCard {
+    padding: 1rem;
+
+    &__iconWrap {
+      width: 40px;
+      height: 40px;
+      margin-right: 1rem;
+    }
+
+    &__content {
+      padding-right: 4rem;
+    }
+
+    &__name {
+      font-size: 1.3rem;
+    }
+
+    &__preview {
+      font-size: 1.1rem;
+    }
+
+    &__time {
+      top: 1rem;
+      right: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .p-message {
+    max-width: 85%;
+    margin-bottom: 1.6rem;
+
+    &__iconWrap {
+      width: 32px;
+      height: 32px;
+    }
+
+    &__content {
+      padding: 0.8rem 1.2rem;
+      margin: 0 0 0 0.8rem;
+
+      &::before {
+        top: 10px;
+        left: -6px;
+        border-right-width: 6px;
+      }
+    }
+
+    &.--sent .p-message__content {
+      margin: 0 0.8rem 0 0;
+
+      &::before {
+        right: -6px;
+        border-left-width: 6px;
+      }
+    }
+
+    &__text {
+      font-size: 1.3rem;
+    }
+
+    &__time {
+      bottom: -1.6rem;
+      font-size: 1rem;
+    }
+  }
+}

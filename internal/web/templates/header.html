@@ -1,0 +1,20 @@
+{{ define "header"}}
+<header class="l-header">
+  <nav class="p-nav">
+    <ul class="p-nav__container">
+      <li class="p-nav__logo c-logo">ChatApp</li>
+      <ul class="p-nav__list">
+        {{if .IsLoggedIn}}
+        <a href="/search" class="p-nav__item">検索</a>
+        <a href="/chat" class="p-nav__item">チャット</a>
+        <a href="/profile" class="p-nav__item">プロフィール</a>
+        <a href="/settings" class="p-nav__item">設定</a>
+        {{else}}
+        <a href="/login" class="p-nav__item">ログイン</a>
+        <a href="/signup" class="p-nav__item">新規登録</a>
+        {{end}}
+      </ul>
+    </ul>
+  </nav>
+</header>
+{{end}}

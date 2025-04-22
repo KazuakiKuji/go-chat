@@ -1,0 +1,77 @@
+{
+  // GoのLanguage Server（gopls）を有効にする
+  "go.useLanguageServer": true,
+
+  "gopls": {
+    // `staticcheck` を有効にし、コードの静的解析を行う（より高度なエラーチェック）
+    "ui.diagnostic.staticcheck": true,
+
+    // `gofumpt` を使用してコードをフォーマットする（gofmt より厳密なフォーマッター）
+    "formatting.gofumpt": true,
+
+    // コード補完の拡張機能を有効にする（`.` を入力した後に補完候補を表示するなど）
+    "experimentalPostfixCompletions": true,
+
+    "analyses": {
+      // 未使用の関数引数を検出し警告を出す
+      "unusedparams": true,
+
+      // 変数のスコープ内でシャドウイング（同じ名前の変数が再宣言されること）を検出する
+      "shadow": true
+    },
+
+    // より詳細な静的解析を有効にする（`staticcheck` の追加チェックを実施）
+    "staticcheck": true
+  },
+
+  "[go]": {
+    // ファイル保存時に自動フォーマットを適用する
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go", // Goのフォーマッターを指定
+
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // Watch Sassファイル
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "~/../css",
+      "generateMap": false
+    }
+  ],
+  "liveSassCompile.settings.generateMap": false,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+
+  "editor.formatOnSave": true,
+
+  // 各言語ごとのフォーマッター設定
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+
+  // Stylelintの設定
+  "stylelint.validate": ["css", "scss"],
+  "stylelint.snippet": ["css", "scss"],
+  "css.validate": false,
+  "scss.validate": false
+}

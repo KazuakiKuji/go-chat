@@ -1,0 +1,39 @@
+{{ define "content" }}
+<h1 class="c-lgTtl">ログイン</h1>
+{{if .Success}}
+<div class="c-success">
+  <p class="c-success__text">
+    アカウントの登録が完了しました。ログインしてください。
+  </p>
+</div>
+{{end}} {{if .ValidationErrors}}
+<div class="c-validation">
+  {{range .ValidationErrors}}
+  <p class="c-validation__text">{{.}}</p>
+  {{end}}
+</div>
+{{end}}
+<form class="p-form" role="form" action="/login" method="post">
+  <input
+    type="email"
+    name="email"
+    class="c-input"
+    placeholder="メールアドレス"
+    required
+    autofocus
+  />
+  <input
+    type="password"
+    name="password"
+    class="c-input"
+    placeholder="パスワード"
+  />
+  <br />
+  <button class="c-btn" type="submit">ログイン</button>
+  <br />
+  <div class="p-form__links">
+    <a class="c-link" href="/signup">登録</a>
+    <a class="c-link" href="/reset-password">パスワードを忘れた方</a>
+  </div>
+</form>
+{{end}}

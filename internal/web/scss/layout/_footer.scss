@@ -1,0 +1,34 @@
+/**
+ * フッターのLayoutスタイルを管理するファイル
+ * footer.htmlにて`l-`が接頭辞につくものが対象
+*/
+
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+.l-footer {
+  padding: 8px 0;
+  background-color: #fff;
+
+  &__container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  &__bottom {
+    text-align: center;
+  }
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+@media screen and (width <= 1024px) {
+}
+
+// ==============================================
+// SMALL
+// ==============================================
+@media screen and (width <= 649px) {
+}

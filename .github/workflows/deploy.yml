@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - release
+    types: [opened, synchronize, reopened, ready_for_review, closed]
+  push:
+    branches:
+      - release
+
+permissions:
+  contents: read
+
+jobs:
+  main_deploy:
+    name: release_deploy
+    if: github.event.pull_request.base.ref == 'release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      DEPLOY_DIR: /var/www/go-chat-app
+      DEPLOY_BRANCH: release
+    steps:
+      - name: Check PR source branch
+        run: |
+          if [ "${{ github.event.pull_request.head.ref }}" != main ]; then
+            echo "PR元のブランチが main ではありません。"
+            exit 1
+          fi
+
+      - name: main_deploy
+        uses: appleboy/ssh-action@bd83ba7e2b3b59ec4007ddc30c72ef12e5d2fff7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          envs: DEPLOY_DIR,DEPLOY_BRANCH
+          script: |
+            set -e
+            cd "$DEPLOY_DIR"
+            git pull origin "$DEPLOY_BRANCH"
+
+      - name: restart_server
+        uses: appleboy/ssh-action@bd83ba7e2b3b59ec4007ddc30c72ef12e5d2fff7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          script: |
+            # tmuxセッションに接続してサーバーを再起動
+            tmux attach -t main
+            sleep 2
+            tmux send-keys -t main "C-c" C-m
+            sleep 2
+            tmux send-keys -t main "go run cmd/app/main.go" C-m

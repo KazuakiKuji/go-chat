@@ -1,0 +1,1224 @@
+@charset "UTF-8";
+/**
+ * 設定ページのスタイルを管理するファイル
+*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  min-width: 0;
+  border-style: solid;
+  border-width: 0;
+}
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+p,
+table,
+blockquote,
+address,
+pre,
+iframe,
+form,
+figure,
+dl {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin-left: 0;
+}
+
+hr {
+  clear: both;
+  box-sizing: content-box;
+  height: 0;
+  margin: 0;
+  overflow: visible;
+  color: inherit;
+  border-top-width: 1px;
+}
+
+pre {
+  font-family: monospace;
+  font-size: inherit;
+}
+
+address {
+  font-style: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+abbr[title] {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace;
+  font-size: inherit;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+svg,
+img,
+embed,
+object,
+iframe {
+  vertical-align: bottom;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  vertical-align: middle;
+  color: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  cursor: pointer;
+}
+
+button:disabled,
+[type=button]:disabled,
+[type=reset]:disabled,
+[type=submit]:disabled {
+  cursor: default;
+}
+
+:-moz-focusring {
+  outline: auto;
+}
+
+select:disabled {
+  opacity: inherit;
+}
+
+option {
+  padding: 0;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type=search] {
+  outline-offset: -2px;
+}
+
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+::-webkit-file-upload-button {
+  font: inherit;
+  -webkit-appearance: button;
+          appearance: button;
+}
+
+[type=number] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+
+label[for] {
+  cursor: pointer;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+[contenteditable]:focus {
+  outline: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-color: inherit;
+}
+
+caption {
+  text-align: left;
+}
+
+td,
+th {
+  padding: 0;
+  vertical-align: top;
+}
+
+th {
+  font-weight: 700;
+  text-align: left;
+}
+
+/**
+ * ベーススタイルを管理するファイル
+*/
+html {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 62.5%;
+  color: #333;
+  background-color: #f4fbff;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+/**
+ * 変数を格納するファイル
+*/
+/**
+ * ヘッダーのLayoutスタイルを管理するファイル
+ * header.htmlにて`l-`が接頭辞につくものが対象
+*/
+.l-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (width <= 649px) {
+  .l-header {
+    height: auto;
+  }
+}
+/**
+ * フッターのLayoutスタイルを管理するファイル
+ * footer.htmlにて`l-`が接頭辞につくものが対象
+*/
+.l-footer {
+  padding: 8px 0;
+  background-color: #fff;
+}
+.l-footer__container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.l-footer__bottom {
+  text-align: center;
+}
+
+/**
+ * メインコンテンツのLayoutスタイルを管理するファイル
+ * <main>タグにて`l-`が接頭辞につくものが対象
+*/
+.l-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.l-main {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.l-section {
+  display: none;
+  width: 100%;
+}
+.l-section.is-active {
+  display: block;
+}
+.l-section.--settings {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.l-message {
+  width: 80%;
+  margin: 20px auto;
+}
+
+/**
+ * FLOCSSにおけるComponentスタイルを管理するファイル
+ * 全htmlファイルにて`c-`が接頭辞につくものが対象
+*/
+.c-lgTtl {
+  margin: 40px 0;
+  font-size: 2.4rem;
+  color: #333;
+  text-align: center;
+}
+.c-lgTtl.--profile {
+  margin: 40px 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.c-midTtl {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333;
+}
+.c-midTtl.--profile {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #666;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+.c-midTtl.--profile:hover {
+  color: #404040;
+}
+
+.c-smTtl {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #657786;
+}
+.c-smTtl.--tab {
+  font-weight: 700;
+}
+
+.c-validation {
+  display: flex;
+  justify-content: center;
+}
+.c-validation__text {
+  font-size: 1.4rem;
+  color: #f00;
+}
+
+.c-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.c-input {
+  width: 100%;
+  padding: 1.2rem;
+  margin-bottom: 1.6rem;
+  font-size: 1.6rem;
+  border: 1px solid #000;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+.c-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+.c-input::-moz-placeholder {
+  color: #999;
+}
+.c-input::placeholder {
+  color: #999;
+}
+
+.c-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.c-label.--profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+.c-label.--profile:hover {
+  opacity: 0.8;
+}
+.c-label.--profile::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  content: "画像を変更";
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+.c-label.--profile:hover::after {
+  opacity: 1;
+}
+.c-label__img {
+  max-width: 100%;
+  height: auto;
+}
+.c-label__img.--profile {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: filter 0.3s ease;
+}
+.c-label__input.--profile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+.c-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.c-btn:hover {
+  background-color: #007bff;
+}
+.c-btn.--secondary {
+  background-color: #6c757d;
+}
+.c-btn.--secondary:hover {
+  background-color: #545b62;
+}
+
+.c-link {
+  display: block;
+  margin-top: 16px;
+  font-size: 1.8rem;
+  color: #4a90e2;
+  text-align: center;
+  text-decoration: none;
+}
+.c-link:hover {
+  text-decoration: underline;
+}
+
+.c-icon__wrap {
+  overflow: hidden;
+  border-radius: 50%;
+}
+.c-icon__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.c-icon__img:hover {
+  cursor: pointer;
+}
+
+.c-txt {
+  font-size: 1rem;
+  color: #000;
+}
+.c-txt.--copyright {
+  color: #666;
+}
+.c-txt.--settings {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c-time {
+  font-size: 12px;
+  color: #999;
+}
+
+@media screen and (width <= 1024px) {
+  .c-logo {
+    font-size: 1.8rem;
+  }
+  .c-midTtl.--profile {
+    font-size: 1.3rem;
+  }
+  .c-label.--profile::after {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (width <= 649px) {
+  .c-logo {
+    font-size: 1.5rem;
+  }
+  .c-link {
+    margin-top: 0;
+  }
+  .c-midTtl.--profile {
+    font-size: 1.2rem;
+  }
+  .c-label.--profile::after {
+    font-size: 1rem;
+  }
+}
+/**
+ * FLOCSSにおけるProjectスタイルを管理するファイル
+ * 全htmlファイルにて`p-`が接頭辞につくものが対象
+*/
+.p-nav {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.p-nav__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  height: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+.p-nav__list {
+  display: flex;
+  gap: 2rem;
+}
+.p-nav__item {
+  font-weight: 500;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.p-nav__item:hover {
+  color: #007bff;
+}
+
+.p-userList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  max-width: 800px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+.p-userList__item {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e8ed;
+  transition: background-color 0.3s ease;
+}
+.p-userList__item:last-child {
+  border-bottom: none;
+}
+.p-userList__item:hover {
+  background-color: #f8f9fa;
+}
+.p-userList__imgWrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-right: 1.5rem;
+}
+.p-userList__status-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.p-userList__status-indicator--online {
+  background-color: #34d399;
+}
+.p-userList__status-indicator--offline {
+  background-color: #ef4444;
+}
+.p-userList__info {
+  flex: 1;
+}
+.p-userList__name {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+.p-userList__status {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #666;
+}
+.p-userList__action {
+  margin-left: 1.5rem;
+}
+.p-userList__btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+}
+
+.p-chatCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.p-chatCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+.p-chatCard__link {
+  display: flex;
+  width: 100%;
+}
+.p-chatCard__iconWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  margin-right: 1.5rem;
+  overflow: hidden;
+  border: 2px solid #f0f0f0;
+  border-radius: 50%;
+}
+.p-chatCard__icon {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.p-chatCard__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding-right: 6rem;
+}
+.p-chatCard__name {
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+.p-chatCard__time {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  color: #999;
+}
+.p-chatCard__preview {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: #666;
+  -webkit-box-orient: vertical;
+}
+.p-chatCard__status-indicator {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.p-chatCard__status-indicator--online {
+  background-color: #34d399;
+}
+.p-chatCard__status-indicator--offline {
+  background-color: #ef4444;
+}
+.p-chatCard__status {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.p-message {
+  display: flex;
+  align-items: flex-start;
+  max-width: 70%;
+  margin-bottom: 2rem;
+}
+.p-message.--sent {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  margin-left: auto;
+}
+.p-message.--sent .p-message__content {
+  margin: 0 1.2rem 0 0;
+  background-color: #007bff;
+  border-radius: 16px 2px 16px 16px;
+}
+.p-message.--sent .p-message__content::before {
+  right: -8px;
+  left: auto;
+  border-right: 0;
+  border-left: 8px solid #007bff;
+}
+.p-message.--sent .p-message__text {
+  color: #fff;
+  text-align: left;
+}
+.p-message.--sent .p-message__time {
+  right: 0;
+  text-align: right;
+}
+.p-message__iconWrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 2px solid #f0f0f0;
+  border-radius: 50%;
+}
+.p-message__icon {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.p-message__content {
+  position: relative;
+  padding: 1.2rem 1.6rem;
+  margin: 0 0 0 1.2rem;
+  background-color: #f5f5f5;
+  border-radius: 2px 16px 16px;
+}
+.p-message__content::before {
+  position: absolute;
+  top: 12px;
+  left: -8px;
+  content: "";
+  border-top: 8px solid transparent;
+  border-right: 8px solid #f5f5f5;
+  border-bottom: 8px solid transparent;
+}
+.p-message__text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #333;
+  word-break: break-word;
+}
+.p-message__time {
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.p-confirm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+.p-confirm__item {
+  padding: 1.6rem;
+  margin-bottom: 15px;
+  background: #f5f5f5;
+}
+.p-confirm__item:last-child {
+  margin-bottom: 0;
+}
+.p-confirm__label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #666;
+}
+.p-confirm__txt {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.p-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  padding: 20px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.p-form__btnWrap {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 80%;
+}
+
+@media screen and (width <= 1024px) {
+  .p-nav__container {
+    max-width: 90%;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+  .p-profile {
+    padding: 1.5rem;
+  }
+  .p-profile-stats {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  .p-tabs__list {
+    gap: 1rem;
+  }
+  .p-tabs__link {
+    padding: 0.75rem 0;
+    font-size: 0.875rem;
+  }
+  .p-userList {
+    max-width: 600px;
+  }
+  .p-chatCard {
+    position: relative;
+    padding: 1.2rem;
+  }
+  .p-chatCard__iconWrap {
+    margin-right: 1.2rem;
+  }
+  .p-chatCard__content {
+    padding-right: 5rem;
+  }
+  .p-chatCard__name {
+    font-size: 1.4rem;
+  }
+  .p-chatCard__preview {
+    font-size: 1.2rem;
+  }
+  .p-chatCard__time {
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 1.1rem;
+  }
+  .p-message {
+    max-width: 75%;
+    margin-bottom: 1.8rem;
+  }
+  .p-message__iconWrap {
+    width: 36px;
+    height: 36px;
+  }
+  .p-message__content {
+    padding: 1rem 1.4rem;
+    margin: 0 0 0 1rem;
+  }
+  .p-message.--sent .p-message__content {
+    margin: 0 1rem 0 0;
+  }
+  .p-message__text {
+    font-size: 1.4rem;
+  }
+  .p-message__time {
+    bottom: -1.8rem;
+    font-size: 1.1rem;
+  }
+}
+@media screen and (width <= 649px) {
+  .p-nav__container {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .p-nav__logo {
+    font-size: 1.5rem;
+  }
+  .p-nav__list {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    width: 100%;
+  }
+  .p-nav__item {
+    font-size: 1rem;
+  }
+  .p-chatCard {
+    padding: 1rem;
+  }
+  .p-chatCard__iconWrap {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+  }
+  .p-chatCard__content {
+    padding-right: 4rem;
+  }
+  .p-chatCard__name {
+    font-size: 1.3rem;
+  }
+  .p-chatCard__preview {
+    font-size: 1.1rem;
+  }
+  .p-chatCard__time {
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+  }
+  .p-message {
+    max-width: 85%;
+    margin-bottom: 1.6rem;
+  }
+  .p-message__iconWrap {
+    width: 32px;
+    height: 32px;
+  }
+  .p-message__content {
+    padding: 0.8rem 1.2rem;
+    margin: 0 0 0 0.8rem;
+  }
+  .p-message__content::before {
+    top: 10px;
+    left: -6px;
+    border-right-width: 6px;
+  }
+  .p-message.--sent .p-message__content {
+    margin: 0 0.8rem 0 0;
+  }
+  .p-message.--sent .p-message__content::before {
+    right: -6px;
+    border-left-width: 6px;
+  }
+  .p-message__text {
+    font-size: 1.3rem;
+  }
+  .p-message__time {
+    bottom: -1.6rem;
+    font-size: 1rem;
+  }
+}
+.l-settings {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding: 2rem;
+  margin: 0 auto;
+}
+.l-settings__header {
+  margin-bottom: 2rem;
+}
+.l-settings__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.l-settings__items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.l-settings__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+.l-settings__item:last-child {
+  border-bottom: none;
+}
+.l-settings__item:hover {
+  background-color: #f8f9fa;
+}
+.l-settings__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-right: 2rem;
+  font-size: 1.6rem;
+  color: #007bff;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+.l-settings__textWrap {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.l-settings__arrow {
+  font-size: 1.4rem;
+  color: #666;
+}
+.l-settings__footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+.l-settings__logoutForm {
+  width: 100%;
+  max-width: 300px;
+}
+.l-settings__btn {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  color: #fff;
+  cursor: pointer;
+  background-color: #ff4757;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+.l-settings__btn:hover {
+  background-color: #ff6b81;
+}
+.l-settings__passwordForm {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+.l-settings__passwordForm.is-active {
+  display: flex;
+}
+.l-settings__errors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.l-settings__formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.l-settings__formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.l-settings__formActions .c-btn {
+  flex: 1;
+}
+
+@media screen and (width <= 1024px) {
+  .l-settings {
+    padding: 1.5rem;
+  }
+  .l-settings__content {
+    padding: 1.5rem;
+  }
+  .l-settings__item {
+    padding: 1.2rem;
+  }
+  .l-settings__icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 1.2rem;
+    font-size: 1.4rem;
+  }
+  .l-settings__btn {
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+  .l-settings__passwordForm {
+    gap: 1.2rem;
+    padding: 1.2rem;
+  }
+}
+@media screen and (width <= 649px) {
+  .l-settings {
+    padding: 1rem;
+  }
+  .l-settings__header {
+    margin-bottom: 1.5rem;
+  }
+  .l-settings__content {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .l-settings__item {
+    padding: 1rem;
+  }
+  .l-settings__icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+  }
+  .l-settings__textWrap {
+    gap: 0.2rem;
+  }
+  .l-settings__arrow {
+    font-size: 1.2rem;
+  }
+  .l-settings__footer {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .l-settings__btn {
+    padding: 0.8rem;
+    font-size: 1.3rem;
+  }
+  .l-settings__passwordForm {
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .l-settings__formActions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .l-sectionWrap {
+    gap: 1.5rem;
+  }
+  .l-section {
+    gap: 1rem;
+  }
+}

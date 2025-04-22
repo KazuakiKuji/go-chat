@@ -1,0 +1,7 @@
+main
+debug.log
+serviceAccountKey.json
+node_modules/
+config.local.ini
+.cursor/*
+.htaccess

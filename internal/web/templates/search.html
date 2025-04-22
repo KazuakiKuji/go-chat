@@ -1,0 +1,125 @@
+{{ define "content" }}
+<div class="l-search">
+  <!-- 検索フォーム -->
+  <div class="l-search__header">
+    <form class="l-searchForm" method="GET" action="/search">
+      <div class="l-searchForm__inputWrap">
+        <input
+          type="text"
+          name="username"
+          class="l-searchForm__input"
+          placeholder="ユーザー名を検索"
+          value="{{ .Query }}"
+        />
+        <button type="submit" class="c-btn">
+          <span class="c-btn__text">検索</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- 検索結果 -->
+  <div class="l-search__content">
+    {{ if .Query }} {{ if .Users }}
+    <ul class="p-userList">
+      {{ range .Users }} {{ $name := .name }} {{ $icon := .icon }} {{ $isOnline
+      := .IsOnline }} {{ $id := .id }}
+      <li class="p-userList__item">
+        <div
+          id="js-iconWrap"
+          class="p-userList__imgWrap c-icon__wrap"
+          data-user-id="{{ $id }}"
+        >
+          {{ if $icon }}
+          <img
+            src="{{ $icon }}"
+            alt="{{ $name }}のアイコン"
+            class="p-userList__icon c-icon__img"
+            onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+          />
+          {{ else }}
+          <img
+            src="{{ getRandomDefaultIcon }}"
+            alt="{{ $name }}のデフォルトアイコン"
+            class="p-userList__icon c-icon__img"
+          />
+          {{ end }}
+          <span
+            class="p-userList__status-indicator {{ if $isOnline }}p-userList__status-indicator--online{{ else }}p-userList__status-indicator--offline{{ end }}"
+          ></span>
+        </div>
+        <div class="p-userList__info">
+          <p class="p-userList__name">{{ $name }}</p>
+          <p class="p-userList__status">
+            {{ if $isOnline }}オンライン{{ else }}オフライン{{ end }}
+          </p>
+        </div>
+        <div class="p-userList__action">
+          <form method="POST" action="/chat/{{ $id }}">
+            <button type="submit" class="p-userList__btn c-btn">
+              チャットを開始
+            </button>
+          </form>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    {{ else }}
+    <div class="l-searchResult">
+      <p class="l-searchResult__text">検索結果が見つかりませんでした</p>
+    </div>
+    {{ end }} {{ else }}
+    <!-- 全ユーザー一覧 -->
+    {{ if .Users }}
+    <ul class="p-userList">
+      {{ range .Users }} {{ $name := .name }} {{ $icon := .icon }} {{ $isOnline
+      := .IsOnline }} {{ $id := .id }}
+      <li class="p-userList__item">
+        <div
+          id="js-iconWrap"
+          class="p-userList__imgWrap c-icon__wrap"
+          data-user-id="{{ $id }}"
+        >
+          {{ if $icon }}
+          <img
+            src="{{ $icon }}"
+            alt="{{ $name }}のアイコン"
+            class="p-userList__icon c-icon__img"
+            onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+          />
+          {{ else }}
+          <img
+            src="{{ getRandomDefaultIcon }}"
+            alt="{{ $name }}のデフォルトアイコン"
+            class="p-userList__icon c-icon__img"
+          />
+          {{ end }}
+          <span
+            class="p-userList__status-indicator {{ if $isOnline }}p-userList__status-indicator--online{{ else }}p-userList__status-indicator--offline{{ end }}"
+          ></span>
+        </div>
+        <div class="p-userList__info">
+          <p class="p-userList__name">{{ $name }}</p>
+          <p class="p-userList__status">
+            {{ if $isOnline }}オンライン{{ else }}オフライン{{ end }}
+          </p>
+        </div>
+        <div class="p-userList__action">
+          <form method="POST" action="/chat/{{ $id }}">
+            <button type="submit" class="p-userList__btn c-btn">
+              チャットを開始
+            </button>
+          </form>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    {{ else }}
+    <div class="l-searchResult">
+      <p class="l-searchResult__text">ユーザーが見つかりませんでした</p>
+    </div>
+    {{ end }} {{ end }}
+  </div>
+</div>
+<script src="/js/card.js"></script>
+{{ end }}

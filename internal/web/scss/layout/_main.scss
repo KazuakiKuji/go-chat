@@ -1,0 +1,45 @@
+/**
+ * メインコンテンツのLayoutスタイルを管理するファイル
+ * <main>タグにて`l-`が接頭辞につくものが対象
+*/
+
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+.l-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.l-main {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+// セクション
+.l-section {
+  display: none;
+  width: 100%;
+
+  &.is-active {
+    // アクティブなセクションを表示
+    display: block;
+  }
+
+  &.--settings {
+    // 設定ページのセクション
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.l-message {
+  width: 80%;
+  margin: 20px auto;
+}

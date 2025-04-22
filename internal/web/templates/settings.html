@@ -1,0 +1,173 @@
+{{ define "content" }}
+<div class="l-settings">
+  <div class="l-settings__header">
+    <h1 class="l-settings__title c-lgTtl">設定</h1>
+  </div>
+
+  <div class="l-settings__content">
+    <div class="l-sectionWrap">
+      <!-- アカウント設定 -->
+      <section class="l-section --settings">
+        <h2 class="c-midTtl">アカウント設定</h2>
+        <div class="l-settings__items">
+          <!-- ユーザー名変更 -->
+          <button
+            type="button"
+            class="l-settings__item"
+            onclick="toggleUsernameForm()"
+          >
+            <div class="l-settings__icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="l-settings__textWrap">
+              <span class="c-txt --settings">ユーザー名の変更</span>
+              <span class="c-txt --settings">ユーザー名を変更します</span>
+            </div>
+            <div class="l-settings__arrow">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </button>
+
+          <form
+            method="POST"
+            action="/settings/username"
+            class="l-settings__usernameForm {{ if .ShowUsernameForm }}is-active{{ end }}"
+            style="display: none"
+          >
+            {{ if .UsernameValidationErrors }}
+            <div class="l-settings__errors">
+              {{ range .UsernameValidationErrors }}
+              <p class="c-validation__text">{{ . }}</p>
+              {{ end }}
+            </div>
+            {{ end }}
+
+            <div class="l-settings__formGroup">
+              <label for="new_username" class="c-label">新しいユーザー名</label>
+              <input
+                type="text"
+                id="new_username"
+                name="new_username"
+                class="c-input"
+                value="{{ .UsernameForm.NewUsername }}"
+                required
+              />
+            </div>
+
+            <div class="l-settings__formActions">
+              <button type="submit" class="l-settings__submitBtn c-btn">
+                ユーザー名を更新
+              </button>
+              <button
+                type="button"
+                class="l-settings__cancelBtn c-btn c-btn--secondary"
+                onclick="toggleUsernameForm()"
+              >
+                キャンセル
+              </button>
+            </div>
+          </form>
+
+          <!-- パスワード変更 -->
+          <button
+            type="button"
+            class="l-settings__item"
+            onclick="togglePasswordForm()"
+          >
+            <div class="l-settings__icon">
+              <i class="fas fa-key"></i>
+            </div>
+            <div class="l-settings__textWrap">
+              <span class="c-txt --settings">パスワードの変更</span>
+              <span class="c-txt --settings">パスワードを再設定します</span>
+            </div>
+            <div class="l-settings__arrow">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </button>
+
+          <form
+            method="POST"
+            action="/settings"
+            class="l-settings__passwordForm {{ if .ShowPasswordForm }}is-active{{ end }}"
+            style="display: none"
+          >
+            {{ if .ValidationErrors }}
+            <div class="l-settings__errors">
+              {{ range .ValidationErrors }}
+              <p class="c-validation__text">{{ . }}</p>
+              {{ end }}
+            </div>
+            {{ end }}
+
+            <div class="l-settings__formGroup">
+              <label for="current_password" class="c-label"
+                >現在のパスワード</label
+              >
+              <input
+                type="password"
+                id="current_password"
+                name="current_password"
+                class="c-input"
+                value="{{ .PasswordForm.CurrentPassword }}"
+                required
+              />
+            </div>
+
+            <div class="l-settings__formGroup">
+              <label for="new_password" class="c-label">新しいパスワード</label>
+              <input
+                type="password"
+                id="new_password"
+                name="new_password"
+                class="c-input"
+                value="{{ .PasswordForm.NewPassword }}"
+                required
+              />
+            </div>
+
+            <div class="l-settings__formGroup">
+              <label for="new_password_confirm" class="c-label"
+                >新しいパスワード（確認）</label
+              >
+              <input
+                type="password"
+                id="new_password_confirm"
+                name="new_password_confirm"
+                class="c-input"
+                value="{{ .PasswordForm.NewPasswordConfirm }}"
+                required
+              />
+            </div>
+
+            <div class="l-settings__formActions">
+              <button type="submit" class="l-settings__submitBtn c-btn">
+                パスワードを更新
+              </button>
+              <button
+                type="button"
+                class="l-settings__cancelBtn c-btn c-btn--secondary"
+                onclick="togglePasswordForm()"
+              >
+                キャンセル
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- ログアウト -->
+    <div class="l-settings__footer">
+      <form method="POST" action="/logout" class="l-settings__logoutForm">
+        <button type="submit" class="l-settings__btn c-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          ログアウト
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/settings.js"></script>
+{{ end }}

@@ -1,0 +1,32 @@
+/**
+ * ヘッダーのLayoutスタイルを管理するファイル
+ * header.htmlにて`l-`が接頭辞につくものが対象
+*/
+
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+.l-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: $box-shadow-lg;
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+// @media screen and (width <= 1024px) {
+// }
+
+// ==============================================
+// SMALL
+// ==============================================
+@media screen and (width <= 649px) {
+  .l-header {
+    height: auto;
+  }
+}

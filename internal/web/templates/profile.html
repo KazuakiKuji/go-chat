@@ -1,0 +1,61 @@
+{{ define "content" }}
+<div class="l-container">
+  <!-- プロフィール部分 -->
+  <section class="l-profile">
+    <div class="l-profile__iconWrap">
+      <!-- アイコン画像 -->
+      {{ if eq .User.ID .LoggedInUserID }}
+      <form action="/profile/icon" method="POST" enctype="multipart/form-data">
+        <label for="icon-upload" class="c-label --profile">
+          <img
+            src="{{ .User.Icon }}"
+            alt="アイコン"
+            class="c-label__img --profile"
+            id="profile-icon"
+            onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+          />
+          <input
+            type="file"
+            id="icon-upload"
+            name="icon"
+            accept="image/*"
+            class="c-label__input --profile"
+            style="display: none"
+            onchange="handleIconChange(event)"
+          />
+        </label>
+      </form>
+      {{ else }}
+      <a href="{{ .User.Icon }}" target="_blank" class="c-icon__link">
+        <img
+          src="{{ .User.Icon }}"
+          alt="{{ .User.Name }}のアイコン"
+          class="c-icon__img"
+          onerror="this.onerror=null; this.src='{{ getRandomDefaultIcon }}';"
+        />
+      </a>
+      {{ end }}
+    </div>
+
+    <h1 class="c-lgTtl --profile">{{.User.Name}}</h1>
+    <div class="l-profile__subTtlContainer">
+      <p class="c-midTtl --profile">{{.User.Email}}</p>
+      <p class="c-midTtl --profile">
+        アカウント作成日: {{.User.CreatedAt.Format "2006-01-02"}}
+      </p>
+    </div>
+
+    <!-- ユーザー情報 -->
+    <ul class="l-profile-stats">
+      <li class="l-profile-stats__item c-smTtl --profile">
+        最終更新: {{.User.UpdatedAt.Format "2006-01-02 15:04:05"}}
+      </li>
+      <li class="l-profile-stats__item c-smTtl --profile">
+        アカウント作成: {{.User.CreatedAt.Format "2006-01-02"}}
+      </li>
+    </ul>
+  </section>
+</div>
+
+<script src="/js/profile.js"></script>
+{{ end }}
