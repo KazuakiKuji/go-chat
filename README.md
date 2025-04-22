@@ -3,18 +3,22 @@
 Goを使用した基本的なチャットアプリになります。
 
 ## アプリURL
-https://tmp.kuji-server.com/search
+https://go-chat-app.kuji-server.com/
+
+### ■ Basic認証
+ユーザー名：ey9n5cjiq5ye
+
+パスワード：ma(5k9bv.dtn
 
 ## スクリーンショット(2025.04.19時点)
 <img src="https://github.com/user-attachments/assets/2db48f5c-f321-47e0-8f1b-c85e8f208684" width="400">
-<img src="https://github.com/user-attachments/assets/af628f92-bf62-4b0b-a164-90bc0fcd9e45" width="400">
-<img src="https://github.com/user-attachments/assets/3d0c6fc1-b7d6-49cf-9dc6-c70a10aaa6dd" width="400">
-<img src="https://github.com/user-attachments/assets/352cb22a-1f25-412c-8630-091e8dcc0c21" width="400">
-
+<img src="https://github.com/user-attachments/assets/6bbdf874-0680-4566-b7da-768c4dbc60a8" width="400">
+<img src="https://github.com/user-attachments/assets/8a7b27b7-41b7-4093-9f73-47089b381892" width="400">
+<img src="https://github.com/user-attachments/assets/37d12558-07b3-4cdb-9380-76e7ca8d1981" width="400">
 
 ## 実装済み機能
 - 認証機能（登録/ログイン/ログアウト）
-- プロフィール（ユーザー名/画像/パスワードなどの変更）
+- プロフィール（ユーザー名・画像・パスワードなどの変更）
 - 検索機能（登録済みユーザーのフィルタリング）
 - チャット機能（他ユーザーと連絡）
 
@@ -94,6 +98,8 @@ https://tmp.kuji-server.com/search
 
 6. **設定ファイルの修正（`config.ini`）**
 
+    * または `config.ini` をコピーし `config.local.ini`に変更してください。
+
     * ポートの設定をしています。ご自身の環境に合わせて、随時修正してください。
 
     ```txt
@@ -116,14 +122,14 @@ https://tmp.kuji-server.com/search
     <img src="https://github.com/user-attachments/assets/7918ecc4-1617-478d-82db-65b183fbbf33" height="300">
 
 
-7. **モジュール初期化および依存解決**
+8. **モジュール初期化および依存解決**
 
    * 事前に、Go及びNode.jsをダウンロードしてください。
       * バージョンは、Goは最低1.21以上, Node.jsはv16.0.0以上を目安に更新してください。
       
       ```bash
       go version
-      npm -v
+      node -v
       ```
 
    * 以下を実行してください。
@@ -137,21 +143,10 @@ https://tmp.kuji-server.com/search
       npm install
       ```
 
-8. **サーバーの起動**
+9. **サーバーの起動**
 
      ```bash
      go run cmd/app/main.go
      ```
      * 実行後、`debug.log`が生成されます。
      * デフォルトだと、`localhost:8050`にアクセスできるようになります。
-
-9. **追加認証**
-   
-    * `localhost:8050/profile`にアクセスしたとき、コマンドラインにて「投稿」「返信」「いいね」に対する認証のリンクが表示されます。リンクにアクセスし、認証を行ってください。
-       * ビルドの完了には数分ほど時間がかかります。
-      ```bash
-      投稿の取得に失敗: rpc error: code = FailedPrecondition desc = The query requires an index. You can create it here: <リンク>
-      返信の取得に失敗: rpc error: code = FailedPrecondition desc = The query requires an index. You can create it here: <リンク>
-      いいねの取得に失敗: rpc error: code = FailedPrecondition desc = The query requires an index. You can create it here: <リンク>
-      ```
-        <img src="https://github.com/user-attachments/assets/1454b620-f78e-4fe7-bb39-04b5810aa576" height="300">
